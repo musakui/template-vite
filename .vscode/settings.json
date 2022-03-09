@@ -1,0 +1,10 @@
+{
+  "editor.lineNumbersMinChars": 4,
+  "editor.roundedSelection": false,
+  "editor.formatOnSave": false,
+  "editor.fontSize": 11,
+  "editor.lineHeight": 15, // 18
+  "editor.minimap": {
+    "enabled": false
+  }
+}
