@@ -1,3 +1,3 @@
-# musakui-vite
+# Vite Starter Template
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/musakui-vite)
+[Edit on StackBlitz ⚡️](https://stackblitz.com/github/musakui/template-vite)
