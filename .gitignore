@@ -1,3 +1,5 @@
+package-lock.json
+
 dist
 node_modules
 
@@ -5,4 +7,3 @@ node_modules
 .env.test
 
 .vscode
-.stackblitzrc

@@ -1,3 +1,3 @@
 # Vite Starter Template
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/fork/github/musakui/template-vite)
+[View on StackBlitz](https://stackblitz.com/github/musakui/template-vite?file=src%2FApp.vue)
