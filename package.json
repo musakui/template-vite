@@ -1,8 +1,9 @@
 {
 	"name": "template-vite",
-	"description": "Template using Vite",
+	"description": "Starter template using Vite & Vue",
 	"author": "musakui",
 	"license": "MIT",
+	"repository": "github:musakui/template-vite",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
