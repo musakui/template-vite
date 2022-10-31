@@ -7,7 +7,6 @@
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
-	"main": "src/main.js",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
@@ -17,9 +16,9 @@
 		"vue": "latest"
 	},
 	"devDependencies": {
+		"@unocss/reset": "latest",
 		"@vitejs/plugin-vue": "latest",
-		"vite": "latest",
-		"vite-plugin-windicss": "latest",
-		"windicss": "latest"
+		"unocss": "latest",
+		"vite": "latest"
 	}
 }
