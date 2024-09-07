@@ -16,7 +16,6 @@
 		"vue": "latest"
 	},
 	"devDependencies": {
-		"@unocss/reset": "latest",
 		"@vitejs/plugin-vue": "latest",
 		"unocss": "latest",
 		"vite": "latest"
