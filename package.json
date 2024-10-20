@@ -13,11 +13,20 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"radix-vue": "latest",
 		"vue": "latest"
 	},
 	"devDependencies": {
+		"@iconify/vue": "latest",
 		"@vitejs/plugin-vue": "latest",
+		"class-variance-authority": "latest",
+		"clsx": "latest",
+		"lucide-vue-next": "latest",
+		"tailwind-merge": "latest",
+		"typescript": "latest",
 		"unocss": "latest",
+		"unocss-preset-animations": "latest",
+		"unocss-preset-shadcn": "latest",
 		"vite": "latest"
 	}
 }

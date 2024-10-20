@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
 		"strict": true,
 		"noEmit": true,
 		"allowJs": true,
@@ -11,7 +12,10 @@
 		"resolveJsonModule": true,
 		"moduleResolution": "Node",
 		"useDefineForClassFields": true,
-		"lib": ["ESNext", "DOM"]
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"lib": ["ESNext", "DOM", "DOM.Iterable"]
 	},
 	"include": [
 		"src/**/*.vue",
