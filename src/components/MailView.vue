@@ -60,7 +60,7 @@ const selectedMailData = computed(() =>
 
 const sheetState = computed({
 	get() {
-		return !!selectedMail.value
+		return !!selectedMail.value && window.matchMedia('(max-width: 768px)').matches
 	},
 	set(v) {
 		if (!v) {
@@ -115,7 +115,7 @@ const links = [
 			</a>
 		</nav>
 		<Separator orientation="vertical" />
-		<div class="sm:hidden">
+		<div class="md:hidden">
 			<Sheet v-model:open="sheetState">
 				<SheetContent class="w-8/9">
 					<SheetHeader>
@@ -125,18 +125,16 @@ const links = [
 					<MailDisplay :mail="selectedMailData" />
 					<SheetFooter>
 						<SheetClose as-child>
-							<Button type="submit">
-								Save changes
-							</Button>
+							<Button>close</Button>
 						</SheetClose>
 					</SheetFooter>
 				</SheetContent>
 			</Sheet>
 			<MailList v-model:selected-mail="selectedMail" :items="filteredMailList" />
 		</div>
-		<div class="hidden sm:block">
+		<div class="hidden md:block">
 			<SplitterGroup direction="horizontal" class="items-stretch">
-				<SplitterPanel :default-size="30" :min-size="30">
+				<SplitterPanel :default-size="40" :min-size="30">
 					<MailList v-model:selected-mail="selectedMail" :items="filteredMailList" />
 				</SplitterPanel>
 				<SplitterResizeHandle
