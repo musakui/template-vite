@@ -13,11 +13,12 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"tailwindcss": "latest",
 		"vue": "latest"
 	},
 	"devDependencies": {
+		"@tailwindcss/vite": "latest",
 		"@vitejs/plugin-vue": "latest",
-		"unocss": "latest",
 		"vite": "latest"
 	}
 }
