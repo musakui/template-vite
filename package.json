@@ -13,12 +13,19 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@vueuse/core": "latest",
+		"class-variance-authority": "latest",
+		"clsx": "latest",
+		"reka-ui": "latest",
+		"tailwind-merge": "latest",
 		"tailwindcss": "latest",
+		"tw-animate-css": "latest",
 		"vue": "latest"
 	},
 	"devDependencies": {
 		"@tailwindcss/vite": "latest",
 		"@vitejs/plugin-vue": "latest",
+		"typescript": "latest",
 		"vite": "latest"
 	}
 }

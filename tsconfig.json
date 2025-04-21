@@ -8,6 +8,9 @@
 		"skipLibCheck": true,
 		"isolatedModules": true,
 		"moduleResolution": "bundler",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
 		"lib": ["ESNext", "DOM", "DOM.Iterable"]
 	},
 	"include": [
