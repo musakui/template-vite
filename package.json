@@ -16,6 +16,7 @@
 		"@vueuse/core": "latest",
 		"class-variance-authority": "latest",
 		"clsx": "latest",
+		"lucide-vue-next": "latest",
 		"reka-ui": "latest",
 		"tailwind-merge": "latest",
 		"tailwindcss": "latest",
