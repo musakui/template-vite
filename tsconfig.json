@@ -8,11 +8,8 @@
 		"skipLibCheck": true,
 		"isolatedModules": true,
 		"moduleResolution": "bundler",
+		"types": ["vite/client"],
 		"lib": ["ESNext", "DOM", "DOM.Iterable"]
 	},
-	"include": [
-		"src/**/*.vue",
-		"src/**/*.ts",
-		"src/**/*.d.ts"
-	]
+	"include": ["src"]
 }

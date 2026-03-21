@@ -1,7 +1,7 @@
 {
 	"recommendations": [
-		"Vue.volar",
 		"esbenp.prettier-vscode",
+		"tobermory.es6-string-html",
 		"bradlc.vscode-tailwindcss"
 	]
 }
