@@ -1,6 +1,6 @@
 {
 	"name": "template-vite",
-	"description": "Starter template using Vite & Vue",
+	"description": "Starter template using Vite",
 	"author": "musakui",
 	"license": "MIT",
 	"repository": "github:musakui/template-vite",
@@ -16,11 +16,12 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@musakui/ui": "^0.0.0",
-		"tailwindcss": "^4.2.0"
+		"@musakui/ui": "^0.0.2",
+		"alien-signals": "^3.2.0",
+		"tailwindcss": "^4.3.0"
 	},
 	"devDependencies": {
-		"@tailwindcss/vite": "^4.2.0",
+		"@tailwindcss/vite": "^4.3.0",
 		"vite": "^8.0.0"
 	}
 }

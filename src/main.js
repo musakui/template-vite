@@ -1,14 +1,13 @@
-import './styles.css'
+import { mount } from '@musakui/ui'
 import App from './app.js'
+import './styles.css'
 
-export function init() {
-	const app = App()
-	app.init()
-	document.body.replaceChildren(app)
-}
-
-init()
+let stop = mount(App, document.body)
 
 if (import.meta.hot) {
-	import.meta.hot.accept((m) => m?.init())
+	import.meta.hot.accept('./app.js', (m) => {
+		stop()
+		if (!m) return
+		stop = mount(m.default, document.body)
+	})
 }

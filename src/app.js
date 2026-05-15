@@ -1,4 +1,5 @@
-import { html, registerEffect } from '@musakui/ui'
+import { html } from '@musakui/ui'
+import { effect } from 'alien-signals'
 import { count, text } from './state.js'
 
 export default function () {
@@ -23,7 +24,7 @@ export function bindText(el) {
 	el.addEventListener('input', () => {
 		text.value = el.value
 	})
-	registerEffect(el, () => {
+	effect(() => {
 		el.value = text.value
 	})
 }
