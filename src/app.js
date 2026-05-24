@@ -1,30 +1,11 @@
 import { html } from '@musakui/ui'
-import { effect } from 'alien-signals'
-import { count, text } from './state.js'
 
 export default function () {
-	return html`
+	return html`<main class="max-w-xl">
 		<h1 class="p-4 text-2xl">Vite Starter Template</h1>
-		<div class="p-4 text-xl text-center">Edit me!</div>
-		<div class="p-4 flex gap-2 items-center">
-			<button
-				class="px-2 py-1 rounded-sm bg-primary text-primary-foreground hover:bg-primary/90"
-				@click=${() => ++count.value}
-			>
-				${count} clicks
-			</button>
-			<input type="text" name="hello" class="px-1 border rounded-sm" ${bindText} />
+		<div class="p-4 text-center text-xl">Edit me!</div>
+		<div class="grid items-center gap-2 p-4">
+			contents
 		</div>
-		<div class="p-4 truncate">${text}</div>
-	`
-}
-
-/** @param {HTMLInputElement} el */
-export function bindText(el) {
-	el.addEventListener('input', () => {
-		text.value = el.value
-	})
-	effect(() => {
-		el.value = text.value
-	})
+	</main>`
 }
