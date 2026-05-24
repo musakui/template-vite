@@ -1,4 +1,7 @@
 import { signal } from '@musakui/ui'
 
-export const text = signal('hello world')
-export const count = signal(0)
+export const errMsg = signal('')
+export const cronInput = signal('')
+export const labelInput = signal('')
+
+export const alarms = signal(/** @type {import('./utils/alarm').Alarm>[]} */ ([]))
