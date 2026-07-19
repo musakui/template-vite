@@ -1,6 +1,7 @@
 import { html } from '@musakui/ui'
 import { outlet } from './router.js'
 import * as Nav from '#/components/nav.js'
+import ToastContainer from '#/components/toast.js'
 
 export default function () {
 	return html`<div class="flex h-dvh w-full overflow-hidden overscroll-none">
@@ -11,5 +12,6 @@ export default function () {
 				<main class="h-full flex-1 overflow-auto">${outlet}</main>
 			</div>
 		</div>
+		${ToastContainer()}
 	</div>`
 }
