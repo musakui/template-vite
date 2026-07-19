@@ -1,0 +1,101 @@
+@layer components {
+	.combobox {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing);
+		font-size: var(--text-sm);
+		padding: var(--padding-info);
+		border: 1px solid var(--color-input);
+		border-radius: var(--radius-md);
+		background-color: color-mix(in oklch, var(--color-input), transparent 90%);
+
+		&:focus-within {
+			border-color: var(--color-ring);
+			box-shadow: 0 0 0 1px var(--color-accent);
+		}
+
+		&::after {
+			content: '›';
+			rotate: 90deg;
+			margin-right: 0.25rem;
+			transition: rotate 0.2s;
+		}
+
+		&:focus-within::after {
+			rotate: 270deg;
+		}
+
+		& [role='listbox'] {
+			overflow-y: auto;
+			width: anchor-size(width);
+			position-area: bottom;
+			position-try-fallbacks: flip-block;
+
+			border: 1px solid var(--color-input);
+			border-radius: var(--radius-md);
+			margin-top: var(--spacing);
+			max-height: calc(60 * var(--spacing));
+			padding: var(--spacing);
+
+			& :not([role='option']) {
+				color: var(--color-muted-foreground);
+				padding: var(--padding-info);
+			}
+
+			& [role='option'] {
+				padding: calc(1.5 * var(--spacing));
+				cursor: pointer;
+
+				&:hover {
+					background-color: var(--color-secondary);
+				}
+
+				&[aria-current='true'] {
+					font-weight: var(--font-weight-medium);
+					background-color: var(--color-secondary);
+				}
+
+				&[aria-selected='true'] {
+					background-color: var(--color-accent);
+				}
+			}
+		}
+
+		& [role='combobox'] {
+			flex: 1;
+			min-width: calc(20 * var(--spacing));
+			outline-style: none;
+		}
+
+		& .chips {
+			display: contents;
+			font-size: var(--text-xs);
+
+			& .badge {
+				display: flex;
+				gap: var(--spacing);
+
+				&:focus-within {
+					outline-width: 1px;
+					outline-style: solid;
+				}
+
+				& button {
+					outline-style: none;
+					margin-top: calc(-0.5 * var(--spacing));
+					margin-right: calc(-1 * var(--spacing));
+				}
+			}
+
+			& .loading {
+				color: var(--color-muted-foreground);
+				animation: var(--animate-pulse);
+			}
+		}
+
+		& select {
+			display: none;
+		}
+	}
+}

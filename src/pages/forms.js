@@ -1,4 +1,34 @@
 import { html, signal } from '@musakui/ui'
+import { Combobox } from '#/components/combobox.js'
+
+const countries = [
+	{ value: 'us', label: 'United States' },
+	{ value: 'ca', label: 'Canada' },
+	{ value: 'mx', label: 'Mexico' },
+	{ value: 'uk', label: 'United Kingdom' },
+	{ value: 'fr', label: 'France' },
+	{ value: 'de', label: 'Germany' },
+	{ value: 'it', label: 'Italy' },
+	{ value: 'es', label: 'Spain' },
+	{ value: 'jp', label: 'Japan' },
+	{ value: 'cn', label: 'China' },
+	{ value: 'in', label: 'India' },
+	{ value: 'au', label: 'Australia' },
+	{ value: 'br', label: 'Brazil' },
+	{ value: 'za', label: 'South Africa' },
+]
+
+const allProducts = [
+	{ value: 'laptop-dell', label: 'Dell XPS Laptop' },
+	{ value: 'laptop-mac', label: 'MacBook Pro' },
+	{ value: 'phone-samsung', label: 'Samsung Galaxy S24' },
+	{ value: 'tablet-ipad', label: 'iPad Air' },
+	{ value: 'watch-apple', label: 'Apple Watch' },
+	{ value: 'watch-samsung', label: 'Samsung Galaxy Watch' },
+	{ value: 'headphones-sony', label: 'Sony WH-1000XM5' },
+	{ value: 'headphones-bose', label: 'Bose QuietComfort' },
+	{ value: 'monitor-lg', label: 'LG UltraWide Monitor' },
+]
 
 const disabled = signal(false)
 
@@ -98,6 +128,62 @@ export default function () {
 					<span>Do not track</span>
 				</label>
 			</fieldset>
+
+			<div class="field">
+				<label for="country">Country</label>
+				${Combobox({
+					id: 'country',
+					name: 'cont',
+					options: countries,
+					placeholder: 'Search countries...',
+				})}
+			</div>
+
+			<div class="field">
+				<label for="prods">Products</label>
+				${Combobox({
+					id: 'prods',
+					name: 'products',
+					multiple: true,
+					options: allProducts,
+					placeholder: 'Search products...',
+				})}
+			</div>
+
+			<div class="field">
+				<label for="prds">Search Products</label>
+				${Combobox({
+					id: 'prds',
+					name: 'searchProduct',
+					placeholder: 'Search products...',
+					async loadOptions(s, signal) {
+						if (s.length < 2) return
+						await new Promise((r) => setTimeout(r, 600))
+						if (signal.aborted) return
+						return allProducts.filter((u) => {
+							return u.label.toLowerCase().includes(s.toLowerCase())
+						})
+					},
+				})}
+			</div>
+
+			<div class="field">
+				<label for="conts">Search Countries</label>
+				${Combobox({
+					id: 'conts',
+					name: 'searchCountry',
+					multiple: true,
+					placeholder: 'Select countries...',
+					async loadOptions(s, signal) {
+						if (s.length < 2) return
+						await new Promise((r) => setTimeout(r, 400))
+						if (signal.aborted) return
+						return countries.filter((c) => {
+							return c.label.toLowerCase().includes(s.toLowerCase())
+						})
+					},
+				})}
+			</div>
 
 			<div class="field">
 				<label for="errr">Error State</label>
