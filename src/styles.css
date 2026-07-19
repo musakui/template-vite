@@ -33,7 +33,20 @@
 		color-scheme: dark;
 	}
 
-	button:not(:disabled) {
+	button {
 		cursor: pointer;
+
+		&:disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+
+		&:hover {
+			opacity: 0.9;
+		}
+
+		&:active {
+			translate: 0 1px;
+		}
 	}
 }
