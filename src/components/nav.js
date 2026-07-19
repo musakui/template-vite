@@ -9,6 +9,7 @@ import { theme, toggleTheme } from '#/utils/theme.js'
 const links = [
 	{ name: 'Home', to: '/' },
 	{ name: 'Basic', to: '/basic' },
+	{ name: 'Forms', to: '/forms' },
 ]
 
 const isOpen = useStorageBool('nav-open')
