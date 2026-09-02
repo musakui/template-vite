@@ -14,7 +14,7 @@ const links = [
 
 const isOpen = useStorageBool('nav-open')
 
-const themeIcons = { light: '🔆', dark: '🌙' }
+const themeIcons = { light: '🔆', dark: '🌙', system: null }
 
 export function Header() {
 	return html`<nav class="sticky top-0 flex items-center gap-2 border-b p-2">

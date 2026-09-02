@@ -43,3 +43,18 @@ export const clamp = (val, min, max) => Math.max(min, Math.min(max, val))
 
 /** @param {number} d */
 export const millis = (d) => new Promise((r) => setTimeout(r, d))
+
+/**
+ * @template {unknown[]} T
+ * @param {(...args: T) => void} fn
+ * @param {number} delay
+ */
+export function debounce(fn, delay) {
+	/** @type {ReturnType<typeof setTimeout>} */
+	let timer
+	/** @param {T} args */
+	return (...args) => {
+		if (timer) clearTimeout(timer)
+		timer = setTimeout(() => fn(...args), delay)
+	}
+}

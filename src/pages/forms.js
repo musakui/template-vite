@@ -157,9 +157,9 @@ export default function () {
 					name: 'searchProduct',
 					placeholder: 'Search products...',
 					async loadOptions(s, signal) {
-						if (s.length < 2) return
+						if (s.length < 2) return []
 						await new Promise((r) => setTimeout(r, 600))
-						if (signal.aborted) return
+						if (signal.aborted) return []
 						return allProducts.filter((u) => {
 							return u.label.toLowerCase().includes(s.toLowerCase())
 						})
@@ -175,9 +175,9 @@ export default function () {
 					multiple: true,
 					placeholder: 'Select countries...',
 					async loadOptions(s, signal) {
-						if (s.length < 2) return
+						if (s.length < 2) return []
 						await new Promise((r) => setTimeout(r, 400))
-						if (signal.aborted) return
+						if (signal.aborted) return []
 						return countries.filter((c) => {
 							return c.label.toLowerCase().includes(s.toLowerCase())
 						})
@@ -220,11 +220,13 @@ export default function () {
 				<button type="submit" class="btn t-primary">Submit</button>
 			</div>
 		</form>
-		</form>
 	</div>`
 }
 
-/** @this {HTMLFormElement} */
+/**
+ * @this {HTMLFormElement}
+ * @param {Event} evt
+ */
 function handleSubmit(evt) {
 	evt.preventDefault()
 	const formData = new FormData(this)

@@ -41,7 +41,7 @@ export function addToast(msg, opts) {
 		<button class="btn" aria-label="Close" @click=${dismiss}>&times;</button>
 	</li>`
 
-	const item = frag.init().el
+	const item = init(frag)
 	frag.commit()
 
 	function dismiss() {
@@ -55,6 +55,7 @@ export function addToast(msg, opts) {
 		if (!container.childElementCount) container.hidePopover()
 	}
 
+	if (!container) return item
 	container.togglePopover(true)
 	container.append(item)
 
@@ -69,6 +70,13 @@ export default function () {
 		popover="manual"
 		class="fixed right-4 bottom-4 flex w-full max-w-sm flex-col gap-2 overflow-hidden sm:max-w-md"
 	></ol>`
-	container = frag.init().el
+	container = init(frag)
 	return frag
+}
+
+/** @param {import('@musakui/ui').HtmlFragment} frag */
+function init(frag) {
+	const el = frag.init().el
+	if (!el) throw new Error('could not init')
+	return el
 }

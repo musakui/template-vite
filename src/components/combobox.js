@@ -115,10 +115,9 @@ export function Combobox(opts) {
 		}
 	}
 
-
 	/** @this {HTMLElement} */
 	function showList() {
-		pop({ force: true, source: this.parentElement })
+		pop({ force: true, source: this.parentElement ?? this })
 		expanded.value = true
 	}
 
@@ -150,6 +149,7 @@ export function Combobox(opts) {
 				break
 			case 'ArrowLeft':
 				if (!multi || sch) return
+				/** @type {NodeListOf<HTMLButtonElement>} */
 				const lst = document.querySelectorAll(`#${grpId} button`)
 				lst[lst.length - 1]?.focus()
 				break
@@ -159,7 +159,7 @@ export function Combobox(opts) {
 			case 'Enter':
 				evt.preventDefault()
 				const opt = list[activeIdx.value]
-				if (opt) selectOption(opt)
+				if (opt) selectOption(opt, new Set(selected.value))
 				break
 			case 'Escape':
 				hideList()
@@ -194,12 +194,16 @@ export function Combobox(opts) {
 		if (!opts?.loadOptions) return
 		if (controller) controller.abort()
 		const st = this.value.trim()
-		if (!st) return
+		if (!st) {
+			loading.value = false
+			return
+		}
 		controller = new AbortController()
+		const sig = controller.signal
 		loading.value = true
 		try {
-			const res = await opts.loadOptions(st, controller.signal)
-			if (controller?.signal.aborted || !res) return
+			const res = await opts.loadOptions(st, sig)
+			if (sig.aborted || !res) return
 			const newMap = new Map(options.value)
 			for (const opt of res) {
 				newMap.set(opt.value, opt.label ?? opt.value)
@@ -209,36 +213,38 @@ export function Combobox(opts) {
 			if (err instanceof DOMException && err.name === 'AbortError') return
 			console.log(err)
 		} finally {
-			if (controller?.signal.aborted) return
+			if (sig.aborted) return
 			loading.value = false
 		}
 	}
 
+	const chips = multi
+		? computed(() => {
+				const sel = selected.value
+				const ops = options.value
+				/** @param {string} val */
+				const remove = (val) => () => {
+					selected.value = sel.filter((v) => v !== val)
+					combobox.el?.focus()
+				}
+				return sel.map((v) => {
+					return html`<div class="badge">
+						${ops.get(v) ?? html`<span class="loading">${v}</span>`}
+						<button @click=${remove(v)}>&times;</button>
+					</div>`
+				})
+			})
+		: null
+
+	const formEl = opts?.name
+		? html`<select name=${opts.name} ?multiple=${multi} ?required=${opts?.required}>
+				${computed(() => selected.value.map(selectedOpt))}
+			</select>`
+		: null
+
 	return html`<div id=${grpId} class="combobox">
-		${opts?.name
-			? html`<select name=${opts.name} ?multiple=${multi} ?required=${opts?.required}>
-					${computed(() => selected.value.map(selectedOpt))}
-				</select>`
-			: null}
-		<div class="chips t-secondary">
-			${multi
-				? computed(() => {
-						const sel = selected.value
-						const ops = options.value
-						/** @param {string} val */
-						const remove = (val) => () => {
-							selected.value = sel.filter((v) => v !== val)
-							combobox.el?.focus()
-						}
-						return sel.map((v) => {
-							return html`<div class="badge">
-								${ops.get(v) ?? html`<span class="loading">${v}</span>`}
-								<button @click=${remove(v)}>&times;</button>
-							</div>`
-						})
-					})
-				: null}
-		</div>
+		${formEl}
+		<div class="chips t-secondary">${chips}</div>
 		${combobox}${listbox}
 	</div>`
 }
