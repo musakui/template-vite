@@ -34,7 +34,7 @@ html`<button @click=${[handleClick, { passive: true }]}>Click me</button>`
 html`<div ${customFunction} />`
 ```
 
-Note: `this` within event handlers have the same behaviour as [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#the_value_of_this_within_the_handler)
+Note: `this` within event handlers have the same behaviour as [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#the_value_of_this_within_the_handler) — `this` is the element, not the component. Use arrow functions or closures to capture component state instead of relying on `this`.
 
 ### NO partial interpolation of attributes
 
@@ -246,6 +246,71 @@ Import and use in `.js` files with `@import`:
 /** @param {Item} item */
 function renderItem(item) {
 	return html`<div>${item.name}</div>`
+}
+```
+
+### Project-local utilities vs library exports
+
+`@musakui/ui` only exports `html`, `signal`, `computed`, `mount`, `isSignal`, and `toValue`. The following helpers are **project-local** utilities in `#/utils/signal.js` — do NOT import them from `@musakui/ui`:
+
+- `cached` — memoize templates by object identity
+- `$str` — two-way bind a signal to an input
+- `update` — mutate a signal value with a function
+- `toggle` — return a click handler that flips a boolean signal
+
+`effect` comes from the underlying `alien-signals` package, not from `@musakui/ui`:
+
+```js
+import { effect } from 'alien-signals'
+```
+
+### Signal reactivity only triggers on `.value` reassignment
+
+`signal` is not a Proxy. Mutating an array or object stored inside a signal will NOT trigger updates:
+
+```js
+// WRONG - mutation is silent, UI will not update
+items.value.push(newItem)
+items.value.name = 'new'
+
+// CORRECT - reassign .value to trigger reactivity
+items.value = [...items.value, newItem]
+update(items, (arr) => [...arr, newItem])
+```
+
+### `mount()` takes a factory function, not a fragment
+
+`mount(fn, target)` calls `fn()` internally to create the fragment. Do not pass a fragment directly:
+
+```js
+// WRONG - crashes, mount expects a function
+mount(html`<div>...</div>`, document.body)
+
+// CORRECT
+mount(() => html`<div>...</div>`, document.body)
+```
+
+Use `mount()` for the top-level app entry point.
+
+### Bind functions must return their cleanup
+
+When writing a custom bind function (raw binding), return the cleanup function. The framework calls it automatically before the binding is re-evaluated or the component is replaced:
+
+```js
+// WRONG - event listener leaks
+return (el) => {
+	el.addEventListener('input', handler)
+	effect(() => { el.value = sig.value })
+}
+
+// CORRECT - cleanup returned so the framework can call it
+return (el) => {
+	el.addEventListener('input', handler)
+	const stop = effect(() => { el.value = sig.value })
+	return () => {
+		el.removeEventListener('input', handler)
+		stop()
+	}
 }
 ```
 
