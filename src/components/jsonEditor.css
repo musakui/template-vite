@@ -1,0 +1,50 @@
+@layer components {
+	.editorfont {
+		font-family: var(--font-mono, ui-monospace, monospace);
+		font-size: var(--text-sm);
+		line-height: 1.5;
+		white-space: pre-wrap;
+		overflow-wrap: break-word;
+		tab-size: 2;
+	}
+
+	.json-editor {
+		position: relative;
+	}
+
+	.json-highlight {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+		padding: var(--padding-info);
+		border: 1px solid var(--color-input);
+		border-radius: var(--radius-md);
+		background-color: color-mix(in oklch, var(--color-input), transparent 50%);
+		pointer-events: none;
+	}
+
+	.field .json-input {
+		display: block;
+		position: relative;
+		z-index: 1;
+		color: transparent;
+		background-color: transparent;
+		caret-color: var(--color-foreground);
+	}
+
+	[data-tok='key'] {
+		color: light-dark(oklch(0.45 0.22 250), oklch(0.68 0.18 250));
+	}
+
+	[data-tok='str'] {
+		color: light-dark(oklch(0.4 0.16 145), oklch(0.68 0.15 145));
+	}
+
+	[data-tok='num'] {
+		color: light-dark(oklch(0.5 0.19 55), oklch(0.75 0.18 55));
+	}
+
+	[data-tok='pun'] {
+		color: var(--color-muted-foreground);
+	}
+}
