@@ -13,6 +13,16 @@ const dispose = createRouter({
 			name: 'Home',
 			page: () => import('./pages/home.js'),
 		},
+		{
+			path: '/basic',
+			name: 'Basic',
+			page: () => import('./pages/basic.js'),
+		},
+		{
+			path: '/forms',
+			name: 'Forms',
+			page: () => import('./pages/forms.js'),
+		},
 	],
 	onBeforeNav(_, m) {
 		match.value = m
